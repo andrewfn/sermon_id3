@@ -32,7 +32,7 @@ function sermon_id3_form_alterx(&$form, &$form_state, $form_id) {
 
 }
 
-function sermon_id3_form_submit($node, $form_state, &$form_state) {
+function sermon_id3_node_submit($node, $form_state, &$form_state) {
   dpm($node);
   if ($node->type == 'sermon') {
     dpm($form_state);
