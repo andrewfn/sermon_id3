@@ -1,54 +1,26 @@
 <?php
 
 /**
- * Implements hook_form_alter().
+ * Implements hook_node_submit().
  */
-function sermon_id3_form_alterx(&$form, &$form_state, $form_id) {
-  drupal_set_message($form_id);
-  if ($form_id === 'sermon_node_form') {
-    dpm($form);
-
-    // Get the file id from the $form array and load use it to load a $file object
-    $file = $form['field_audio']['#value'];
-    dpm($file);
-    //$file = file_load($fid);
-
-/*
-    drupal_set_message($file->type);
-    if ($file->type === 'audio') {
-
-      // Retrieve file metadata
-      $file_metadata = getid3_analyze(drupal_realpath($file->uri));
-
-      // Assign the metadata information that we're interested in to the $form array
-      $form['field_artist'][LANGUAGE_NONE][0]['value']['#default_value'] = $file_metadata['id3v1']['artist'];
-      $form['field_title'][LANGUAGE_NONE][0]['value']['#default_value'] = $file_metadata['id3v1']['title'];
-      $form['field_album_name'][LANGUAGE_NONE][0]['value']['#default_value'] = $file_metadata['id3v1']['album'];
-      $form['field_year'][LANGUAGE_NONE][0]['value']['#default_value'] = $file_metadata['id3v1']['year'];
-      $form['field_play_time'][LANGUAGE_NONE][0]['value']['#default_value'] = $file_metadata['playtime_string'];
-    }
-*/
-  }
-
-}
 
 function sermon_id3_node_submit($node, $form, &$form_state) {
-  dpm($node);
+  //dpm($node);
   if ($node->type == 'sermon') {
-    dpm($form_state);
+    //dpm($form_state);
     // Get file id from $form_state and use it to load $file object
     $fid = $form_state['input']['field_audio']['und'][0]['fid'];
-    dpm($fid);
+    //dpm($fid);
     $file = file_load($fid);
-    dpm($file);
+    //dpm($file);
     if ($file->type === 'audio') {
       $id3_tags = getid3_analyze_file($file);
-      dpm($id3_tags);
+      //dpm($id3_tags);
       $node->field_talk_title[LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['title'][0];
       $node->field_speaker[LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['artist'][0];
       $node->field_series[LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['album'][0];
       $node->field_date[LANGUAGE_NONE][0]['value']   = $id3_tags['tags']['id3v2']['year'][0];
-      $node->field_year[LANGUAGE_NONE][0]['value']   = $id3_tags['tags']['id3v2']['year'][0];
+      //$node->field_year[LANGUAGE_NONE][0]['value']   = $id3_tags['tags']['id3v2']['year'][0];
       $node->field_length[LANGUAGE_NONE][0]['value'] = $id3_tags['playtime_string'];
       $node->title = $id3_tags['tags']['id3v2']['title'][0] . ' - ' . $id3_tags['tags']['id3v2']['artist'][0];
     }
