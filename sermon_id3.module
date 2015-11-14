@@ -3,7 +3,7 @@
 /**
  * Implements hook_form_alter().
  */
-function sermon_id3_form_alter(&$form, &$form_state, $form_id) {
+function sermon_id3_form_alterx(&$form, &$form_state, $form_id) {
   drupal_set_message($form_id);
   if ($form_id === 'sermon_node_form') {
     dpm($form);
@@ -30,4 +30,16 @@ function sermon_id3_form_alter(&$form, &$form_state, $form_id) {
 */
   }
 
+}
+
+function sermon_id3_form_submit($node, $form_state, &$form_state) {
+  dpm($node);
+  if ($node->type == 'sermon') {
+    dpm($form_state);
+
+    // Get the file id from the $form array and load use it to load a $file object
+    //$file = $form['field_audio']['#value'];
+    //dpm($file);
+    //$file = file_load($fid);
+  }
 }
