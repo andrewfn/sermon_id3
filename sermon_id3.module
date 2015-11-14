@@ -7,11 +7,13 @@ function sermon_id3_form_alter(&$form, &$form_state, $form_id) {
   drupal_set_message($form_id);
   if ($form_id === 'sermon_node_form') {
     dpm($form);
- /*
-    // Get the file id from the $form array and load use it to load a $file object
-    $fid = $form['fid']['#value'];
-    $file = file_load($fid);
 
+    // Get the file id from the $form array and load use it to load a $file object
+    $file = $form['field_audio']['#value'];
+    dpm($file);
+    //$file = file_load($fid);
+
+/*
     drupal_set_message($file->type);
     if ($file->type === 'audio') {
 
