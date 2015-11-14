@@ -32,12 +32,13 @@ function sermon_id3_form_alterx(&$form, &$form_state, $form_id) {
 
 }
 
-function sermon_id3_node_submit($node, $form_state, &$form_state) {
+function sermon_id3_node_submit($node, $form, &$form_state) {
   dpm($node);
   if ($node->type == 'sermon') {
     dpm($form_state);
-
     // Get the file id from the $form array and load use it to load a $file object
+    //$fid = $form['field_audio']['#value'];
+
     //$file = $form['field_audio']['#value'];
     //dpm($file);
     //$file = file_load($fid);
