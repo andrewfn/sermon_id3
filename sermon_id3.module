@@ -54,6 +54,7 @@ function sermon_id3_node_submit($node, $form, &$form_state) {
       $form_state['values']['field_series'][LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['album'][0];
       $form_state['values']['field_year'][LANGUAGE_NONE][0]['value']   = $id3_tags['tags']['id3v2']['year'][0];
       $form_state['values']['field_length'][LANGUAGE_NONE][0]['value'] = $id3_tags['playtime_string'];
+      dpm($id3_tags);
     }
   }
 }
