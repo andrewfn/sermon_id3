@@ -50,7 +50,7 @@ function sermon_id3_node_submit($node, $form, &$form_state) {
       $node->field_date[LANGUAGE_NONE][0]['value']   = $id3_tags['tags']['id3v2']['year'][0];
       $node->field_year[LANGUAGE_NONE][0]['value']   = $id3_tags['tags']['id3v2']['year'][0];
       $node->field_length[LANGUAGE_NONE][0]['value'] = $id3_tags['playtime_string'];
-      $node->title = $id3_tags['tags']['id3v2']['title'][0] . ' - ' $id3_tags['tags']['id3v2']['artist'][0];
+      $node->title = $id3_tags['tags']['id3v2']['title'][0] . ' - ' . $id3_tags['tags']['id3v2']['artist'][0];
     }
   }
 }
