@@ -45,7 +45,12 @@ function sermon_id3_node_submit($node, $form, &$form_state) {
       $id3_tags = getid3_analyze_file($file);
       dpm($id3_tags);
       $form_state['values']['field_title'][LANGUAGE_NONE][0]['value']  = $id3_tags['tags']['id3v2']['title'][0];
+      $form_state['input']['field_title'][LANGUAGE_NONE][0]['value']  = $id3_tags['tags']['id3v2']['title'][0];
+      $form_state['input']['title'][LANGUAGE_NONE][0]['value']  = $id3_tags['tags']['id3v2']['title'][0];
+      dpm($id3_tags['tags']['id3v2']['title'][0]);
       $form_state['values']['field_artist'][LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['artist'][0];
+      $form_state['input']['field_artist'][LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['artist'][0];
+      dpm($id3_tags['tags']['id3v2']['artist'][0]);
       $form_state['values']['field_series'][LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['album'][0];
       $form_state['values']['field_year'][LANGUAGE_NONE][0]['value']   = $id3_tags['tags']['id3v2']['year'][0];
       $form_state['values']['field_length'][LANGUAGE_NONE][0]['value'] = $id3_tags['playtime_string'];
