@@ -36,10 +36,14 @@ function sermon_id3_node_submit($node, $form, &$form_state) {
   dpm($node);
   if ($node->type == 'sermon') {
     dpm($form_state);
-    // Get the file id from the $form array and load use it to load a $file object
+    // Get file id from $form_state and use it to load $file object
     $fid = $form_state['input']['field_audio']['und'][0]['fid'];
     dpm($fid);
     $file = file_load($fid);
     dpm($file);
+    if ($file->type === 'audio') {
+      $id3_tags = getid3_analyze_file($file);
+      dpm($id3_tags);
+    }
   }
 }
