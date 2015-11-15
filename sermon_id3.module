@@ -25,14 +25,26 @@ function sermon_id3_node_submit($node, $form, &$form_state) {
     if ($file->type === 'audio') {
       $id3_tags = getid3_analyze_file($file);
       //dpm($id3_tags);
-      $node->field_talk_title[LANGUAGE_NONE][0]['value'] = $id3_tags['tags_html']['id3v2']['title'][0];
-      $node->field_speaker[LANGUAGE_NONE][0]['value'] = $id3_tags['tags_html']['id3v2']['artist'][0];
-      $node->field_series[LANGUAGE_NONE][0]['value'] = isset($id3_tags['tags_html']['id3v2']['genre'][0]) ? $id3_tags['tags_html']['id3v2']['genre'][0] : '';
-      $node->field_date[LANGUAGE_NONE][0]['value']   = $id3_tags['tags_html']['id3v2']['year'][0];
-      //$node->field_organization[LANGUAGE_NONE][0]['value'] = $id3_tags['tags_html']['id3v2']['album'][0];
-      //$node->field_year[LANGUAGE_NONE][0]['value']   = $id3_tags['tags_html']['id3v2']['year'][0];
-      $node->field_length[LANGUAGE_NONE][0]['value'] = $id3_tags['playtime_string'];
-      $node->title = $id3_tags['tags_html']['id3v2']['title'][0] . ' - ' . $id3_tags['tags_html']['id3v2']['artist'][0];
+      $talk_title  = $id3_tags['tags_html']['id3v2']['title'][0];
+      $speaker     = $id3_tags['tags_html']['id3v2']['artist'][0];
+      $part  = isset($id3_tags['tags_html']['id3v2']['track_number'][0]) ? $id3_tags['tags_html']['id3v2']['track_number'][0] : '';
+      $date  = isset($id3_tags['tags_html']['id3v2']['recording_time'][0])
+                   ? $id3_tags['tags_html']['id3v2']['recording_time'][0]
+                   : $id3_tags['tags_html']['id3v2']['year'][0];
+      $album       = $id3_tags['tags_html']['id3v2']['album'][0];
+      $series = isset($id3_tags['tags_html']['id3v2']['genre'][0])) ? $id3_tags['tags_html']['id3v2']['genre'][0] : '';;
+      $length      = $id3_tags['playtime_string'];
+
+      //$node->field_organization[LANGUAGE_NONE][0]['value'] = $album;
+      //$node->field_part[LANGUAGE_NONE][0]['value'] = $part;
+      $node->field_talk_title[LANGUAGE_NONE][0]['value'] = $talk_title;
+      $node->field_speaker[LANGUAGE_NONE][0]['value']    = $speaker;
+      $node->field_date[LANGUAGE_NONE][0]['value']       = $date;
+      $node->field_series[LANGUAGE_NONE][0]['value']     = $series;
+      $node->field_length[LANGUAGE_NONE][0]['value']     = $length;
+      $partname = $part ? ' pt' . $part : '';
+      $seriesname = $series ? ' (' . $series . $partname . ')' : '';
+      $node->title = $talk_title . $seriesname . ' - ' . $speaker];
     }
   }
 }
