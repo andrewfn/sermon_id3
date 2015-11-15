@@ -4,7 +4,7 @@
  */
 function sermon_id3_form_alter(&$form, &$form_state, $form_id) {
   dpm($form_id);
-  if ($form_id === 'sermon_node_form') {
+  if ($form_id == 'sermon_node_form') {
     dpm($form);
   }
 }
