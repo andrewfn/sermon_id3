@@ -24,7 +24,7 @@ function sermon_id3_node_submit($node, $form, &$form_state) {
     //dpm($file);
     if ($file->type === 'audio') {
       $id3_tags = getid3_analyze_file($file);
-      //dpm($id3_tags);
+      dpm($id3_tags);
       $node->field_talk_title[LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['title'][0];
       $node->field_speaker[LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['artist'][0];
       $node->field_series[LANGUAGE_NONE][0]['value'] = $id3_tags['tags']['id3v2']['album'][0];
