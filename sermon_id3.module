@@ -44,7 +44,7 @@ function sermon_id3_node_submit($node, $form, &$form_state) {
       $node->field_length[LANGUAGE_NONE][0]['value']     = $length;
       $partname = $part ? ' pt' . $part : '';
       $seriesname = $series ? ' (' . $series . $partname . ')' : '';
-      $node->title = $talk_title . $seriesname . ' - ' . $speaker];
+      $node->title = $talk_title . $seriesname . ' - ' . $speaker;
     }
   }
 }
