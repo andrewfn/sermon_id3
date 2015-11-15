@@ -32,7 +32,7 @@ function sermon_id3_node_submit($node, $form, &$form_state) {
                    ? $id3_tags['tags_html']['id3v2']['recording_time'][0]
                    : $id3_tags['tags_html']['id3v2']['year'][0];
       $album       = $id3_tags['tags_html']['id3v2']['album'][0];
-      $series = isset($id3_tags['tags_html']['id3v2']['genre'][0])) ? $id3_tags['tags_html']['id3v2']['genre'][0] : '';;
+      $series = isset($id3_tags['tags_html']['id3v2']['genre'][0]) ? $id3_tags['tags_html']['id3v2']['genre'][0] : '';;
       $length      = $id3_tags['playtime_string'];
 
       //$node->field_organization[LANGUAGE_NONE][0]['value'] = $album;
